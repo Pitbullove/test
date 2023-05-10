@@ -12,7 +12,7 @@
   <br><br>
   <button onclick="addToPlaylist()"style="width: 200px; height: 100px; font-size: 20px;"> 플레이리스트 추가</button>
   <button onclick="playPlaylist()"style="width: 200px; height: 100px; font-size: 20px;"> 플레이리스트 재생</button>
-  <button onclick="goToURL()"style="width: 200px; height: 100px; font-size: 20px;"> 순서대로 자동 재생</button>
+  <button onclick="goToURL()"style="width: 200px; height: 100px; font-size: 20px;"> 버튼순서 자동 재생</button>
   <div id="playlistContainer"></div>
 
   <br><br>
@@ -20,6 +20,8 @@
 
   <script>
     var playlist = [];
+    var namelist = [];
+    var count = 0;
     var currentIndex = 0;
     var iframe = document.getElementById("myIFrame");
     var playlistContainer = document.getElementById("playlistContainer");
@@ -33,31 +35,40 @@
 
     playButton1.addEventListener("click", function() {
       iframe.src = "https://www.youtube.com/embed/GKYHd9xYbDc?autoplay=1&end=8583&start=8347&controls=1&playsinline=1";
+      name1 = "青花瓷(청화자)"
     });
     playButton2.addEventListener("click", function() {
       iframe.src = "https://www.youtube.com/embed/GKYHd9xYbDc?autoplay=1&end=8903&start=8607&controls=1&playsinline=1";
+      name1= "周杰伦(국화대)"
     });
     playButton3.addEventListener("click", function() {
       iframe.src = "https://www.youtube.com/embed/BCQaYPFkI-o?autoplay=1&end=8041&start=7852&controls=1&playsinline=1";
+      name1= "아리랑"
     });
     playButton4.addEventListener("click", function() {
       iframe.src = "https://www.youtube.com/embed/0BJID3mHQfo?autoplay=1&end=4404&start=4203&controls=1&playsinline=1";
+      name1= "둥지"
     });
     playButton5.addEventListener("click", function() {
       iframe.src = "https://www.youtube.com/embed/QT7UiiQwRFs?autoplay=1&end=8190&start=7294&controls=1&playsinline=1";
+      name1= "천년학"
     });
 
 
 
     function addToPlaylist() {
+      count ++;
       var iframeSrc = iframe.src;
+      var name = name1; 
       if (iframeSrc) {
         playlist.push(iframeSrc);
-        console.log("동영상이 플레이리스트에 추가되었습니다.");
-        console.log("현재 플레이리스트:", playlist);
+        namelist.push(name1);
+        alert("동영상이 플레이리스트에 추가되었습니다.");
+        alert("현재 플레이리스트: " + namelist.join(", "));
+        
 
         var playlistItem = document.createElement("div");
-        playlistItem.innerText = iframeSrc;
+        playlistItem.innerText =  count+"." + " "+ name;
         playlistContainer.appendChild(playlistItem);
       }
     }
@@ -105,7 +116,6 @@
   </script>
 </body>
 </html>
-
 
 
 
