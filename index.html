@@ -4,13 +4,14 @@
   <title>IFrame 재생 버튼</title>
 </head>
 <body>
-  <button id="playButton1">1 재생</button>
-  <button id="playButton2">2 재생</button>
-  <button id="playButton3">3 재생</button>
-  <button id="playButton4">4 재생</button>
-  <button id="playButton5">5 재생</button>
-  <button onclick="addToPlaylist()">동영상 저장</button>
-  <button onclick="playPlaylist()">플레이리스트 재생</button>
+  <button id="playButton1">[대금] 周杰倫 - 青花瓷(청화자)</button>
+  <button id="playButton2">[대금] 菊花台 - 周杰伦(국화대) 재생</button>
+  <button id="playButton3">아리랑</button>
+  <button id="playButton4">둥지</button>
+  <button id="playButton5">천년학</button>
+  <button onclick="addToPlaylist()"> 플레이리스트 추가</button>
+  <button onclick="playPlaylist()"> 플레이리스트 재생</button>
+  <button onclick="goToURL()">버튼 순서대로 자동 재생</button>
   <div id="playlistContainer"></div>
 
   <br><br>
@@ -29,23 +30,24 @@
     var playButton4 = document.getElementById("playButton4");
     var playButton5 = document.getElementById("playButton5");
 
-    var iframe = document.getElementById("myIFrame");
     playButton1.addEventListener("click", function() {
-      iframe.src = "https://www.youtube.com/embed/BCQaYPFkI-o?autoplay=1&end=7000&start=6990&controls=1&playsinline=1";
+      iframe.src = "https://www.youtube.com/embed/GKYHd9xYbDc?autoplay=1&end=8583&start=8347&controls=1&playsinline=1";
     });
     playButton2.addEventListener("click", function() {
-      iframe.src = "https://www.youtube.com/embed/7xLjUrq-3DM?autoplay=1&end=7000&start=6990&controls=1&playsinline=1";
+      iframe.src = "https://www.youtube.com/embed/GKYHd9xYbDc?autoplay=1&end=8903&start=8607&controls=1&playsinline=1";
     });
     playButton3.addEventListener("click", function() {
-      iframe.src = "https://www.youtube.com/embed/CFiVZD8n0tM?autoplay=1&end=7000&start=6990&controls=1&playsinline=1";
+      iframe.src = "https://www.youtube.com/embed/BCQaYPFkI-o?autoplay=1&end=8041&start=7852&controls=1&playsinline=1";
     });
     playButton4.addEventListener("click", function() {
-      iframe.src = "https://www.youtube.com/embed/hKgKl83sStY?autoplay=1&end=7000&start=6990&controls=1&playsinline=1";
+      iframe.src = "https://www.youtube.com/embed/0BJID3mHQfo?autoplay=1&end=4404&start=4203&controls=1&playsinline=1";
     });
     playButton5.addEventListener("click", function() {
-      iframe.src = "https://www.youtube.com/embed/4FysjSdxlyE?autoplay=1&end=7000&start=6990&controls=1&playsinline=1";
+      iframe.src = "https://www.youtube.com/embed/QT7UiiQwRFs?autoplay=1&end=8190&start=7294&controls=1&playsinline=1";
     });
-    
+
+
+
     function addToPlaylist() {
       var iframeSrc = iframe.src;
       if (iframeSrc) {
@@ -68,7 +70,9 @@
       iframe.src = nextVideo;
       currentIndex++;
 
-      iframe.addEventListener("pause", checkVideoStatus);
+      iframe.addEventListener("pause", function() {
+      playPlaylist();
+    });
     }
 
     function checkVideoStatus() {
@@ -87,7 +91,16 @@
       currentIndex++;
     }
 
-    iframe.addEventListener("ended", playNextVideo);
+  function goToURL() {
+      window.location.href = "https://pitbullove.github.io/test/1st"; // 이동하고자 하는 URL을 입력합니다
+    }
+
+
+    iframe.addEventListener("ended", function() {
+      playPlaylist();
+    });
+
+    
   </script>
 </body>
 </html>
