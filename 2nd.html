@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IFrame 재생 버튼</title>
+</head>
+<body>
+  <button id="playButton1">1 재생</button>
+  <button id="playButton2">2 재생</button>
+  <button id="playButton3">3 재생</button>
+  <button id="playButton4">4 재생</button>
+  <button id="playButton5">5 재생</button>
+  <button onclick="addToPlaylist()">동영상 저장</button>
+  <button onclick="playPlaylist()">플레이리스트 재생</button>
+  <div id="playlistContainer"></div>
+
+  <br><br>
+  <iframe id="myIFrame" type="text/html" width="720" height="405" src="" frameborder="0" allowfullscreen></iframe>
+
+  <script>
+    var playlist = [];
+    var currentIndex = 0;
+    var iframe = document.getElementById("myIFrame");
+    var playlistContainer = document.getElementById("playlistContainer");
+
+  
+    var playButton1 = document.getElementById("playButton1");
+    var playButton2 = document.getElementById("playButton2");
+    var playButton3 = document.getElementById("playButton3");
+    var playButton4 = document.getElementById("playButton4");
+    var playButton5 = document.getElementById("playButton5");
+
+    var iframe = document.getElementById("myIFrame");
+    playButton1.addEventListener("click", function() {
+      iframe.src = "https://www.youtube.com/embed/BCQaYPFkI-o?autoplay=1&end=7000&start=6990&controls=1&playsinline=1";
+    });
+    playButton2.addEventListener("click", function() {
+      iframe.src = "https://www.youtube.com/embed/7xLjUrq-3DM?autoplay=1&end=7000&start=6990&controls=1&playsinline=1";
+    });
+    playButton3.addEventListener("click", function() {
+      iframe.src = "https://www.youtube.com/embed/CFiVZD8n0tM?autoplay=1&end=7000&start=6990&controls=1&playsinline=1";
+    });
+    playButton4.addEventListener("click", function() {
+      iframe.src = "https://www.youtube.com/embed/hKgKl83sStY?autoplay=1&end=7000&start=6990&controls=1&playsinline=1";
+    });
+    playButton5.addEventListener("click", function() {
+      iframe.src = "https://www.youtube.com/embed/4FysjSdxlyE?autoplay=1&end=7000&start=6990&controls=1&playsinline=1";
+    });
+    
+    function addToPlaylist() {
+      var iframeSrc = iframe.src;
+      if (iframeSrc) {
+        playlist.push(iframeSrc);
+        console.log("동영상이 플레이리스트에 추가되었습니다.");
+        console.log("현재 플레이리스트:", playlist);
+
+        var playlistItem = document.createElement("div");
+        playlistItem.innerText = iframeSrc;
+        playlistContainer.appendChild(playlistItem);
+      }
+    }
+
+    function playPlaylist() {
+      if (currentIndex >= playlist.length) {
+        currentIndex = 0; // 플레이리스트의 마지막 동영상이 재생된 경우, 첫 번째 동영상으로 되돌아갑니다.
+      }
+
+      var nextVideo = playlist[currentIndex];
+      iframe.src = nextVideo;
+      currentIndex++;
+
+      iframe.addEventListener("pause", checkVideoStatus);
+    }
+
+    function checkVideoStatus() {
+      if (iframe.paused || iframe.ended) {
+        playNextVideo();
+      }
+    }
+
+    function playNextVideo() {
+      if (currentIndex >= playlist.length) {
+        currentIndex = 0; // 플레이리스트의 마지막 동영상이 재생된 경우, 첫 번째 동영상으로 되돌아갑니다.
+      }
+
+      var nextVideo = playlist[currentIndex];
+      iframe.src = nextVideo;
+      currentIndex++;
+    }
+
+    iframe.addEventListener("ended", playNextVideo);
+  </script>
+</body>
+</html>
+
+
+
+
+
